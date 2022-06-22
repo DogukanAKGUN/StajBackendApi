@@ -1,0 +1,41 @@
+﻿<Properties StartupConfiguration="{EE88A510-C09E-476F-899E-DE8D69695A27}|Default">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="StajBackend/Startup.cs">
+    <Files>
+      <File FileName="StajBackend/Program.cs" Line="19" Column="1" />
+      <File FileName="StajBackend/appsettings.json" Line="1" Column="1" />
+      <File FileName="StajBackend/Properties/launchSettings.json" Line="17" Column="26" />
+      <File FileName="StajBackend/Startup.cs" Line="19" Column="6" />
+      <File FileName="StajBackend/Controllers/UserController.cs" Line="32" Column="6" />
+      <File FileName="StajBackend/Model/User.cs" Line="24" Column="57" />
+      <File FileName="StajBackend/appsettings.Development.json" Line="11" Column="2" />
+      <File FileName="StajBackend/Model/Address.cs" Line="11" Column="3" />
+      <File FileName="StajBackend/Model/Geo.cs" Line="7" Column="34" />
+      <File FileName="StajBackend/Model/Company.cs" Line="8" Column="33" />
+      <File FileName="StajBackend/Model/Bank.cs" Line="11" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="StajBackend" expanded="True">
+            <Node name="StajBackend" expanded="True" selected="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Model" expanded="True" />
+              <Node name="Properties" expanded="True" />
+              <Node name="appsettings.json" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.StajBackend PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>

@@ -1,0 +1,85 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/dogukan/Projects/StajBackend/StajBackend/StajBackend.csproj": {}
+  },
+  "projects": {
+    "/Users/dogukan/Projects/StajBackend/StajBackend/StajBackend.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/dogukan/Projects/StajBackend/StajBackend/StajBackend.csproj",
+        "projectName": "StajBackend",
+        "projectPath": "/Users/dogukan/Projects/StajBackend/StajBackend/StajBackend.csproj",
+        "packagesPath": "/Users/dogukan/.nuget/packages/",
+        "outputPath": "/Users/dogukan/Projects/StajBackend/StajBackend/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/dogukan/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Flurl": {
+              "target": "Package",
+              "version": "[3.0.6, )"
+            },
+            "Flurl.Http": {
+              "target": "Package",
+              "version": "[3.2.4, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.16.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.3.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
