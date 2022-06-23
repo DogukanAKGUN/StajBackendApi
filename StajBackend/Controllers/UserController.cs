@@ -99,15 +99,17 @@ namespace StajAPI.Controllers
         //Put ile var olan bir kaydı güncelledim
         //eksikliği array içine kayıt yapamıyorum
         [HttpPut]
-        public JsonResult Put(User entity)
+        public JsonResult Put(User entity , Bank array)
         {
            
             MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
             // Filter ile hangi id ye ulaşmak istediğimizi bulup onun proplarını güncelleme yapıyorum
             var filter = Builders<User>.Filter.Eq("Id", entity.Id);
+            var arrayfilter = Builders<Bank>.Filter.Eq("Id", array.Id);
+
             //burda gerekli alanların eklenmisini yapıyorum
-            var update = Builders<User>.Update.Set("Name", entity.name)
-                                              .Set("username",entity.username)
+            var update = Builders<User>.Update.Set("name", entity.name)
+                                              .Set("username", entity.username)
                                               .Set("email", entity.email)
                                               .Set("address.street", entity.address.street)
                                               .Set("address.suite", entity.address.suite)
@@ -120,11 +122,28 @@ namespace StajAPI.Controllers
                                               .Set("company.name", entity.company.name)
                                               .Set("company.catchPhrase", entity.company.catchPhrase)
                                               .Set("company.bs", entity.company.bs);
+            //Sıkıntılı!!!!
+            var arrayUpdate = Builders<Bank>.Update.Set("bankName", array.bankName)
+                                                   .Set("bankNumber", array.bankNumber);
+                                              
+            
             //Veri tabanına ulaşıp bütün modeli tek seferde put yapıyorum
             dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User").UpdateOne(filter, update);
 
+            dbClient.GetDatabase("ArasWebAPI").GetCollection<Bank>("User.userBankAccounts").UpdateOne(arrayfilter, arrayUpdate);
+
+
             //Verilen mesaj
             return new JsonResult("Updated Successfully");
+        }
+
+        [HttpDelete]
+        public JsonResult Delete(int id)
+        {
+            MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
+            var filter = Builders<User>.Filter.Eq("Id", id);
+            dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User").DeleteOne(filter);
+            return new JsonResult("Deleted Successfully");
         }
     }
 }

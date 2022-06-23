@@ -103,8 +103,15 @@ namespace StajBackend.Controllers
             return new JsonResult("Updated Successfully");
         }
 
-        
 
+        [HttpDelete]
+        public JsonResult Delete(int id)
+        {
+            MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
+            var filter = Builders<Post>.Filter.Eq("Id", id);
+            dbClient.GetDatabase("ArasWebAPI").GetCollection<Post>("Post").DeleteOne(filter);
+            return new JsonResult("Deleted Successfully");
+        }
     }
 }
 
