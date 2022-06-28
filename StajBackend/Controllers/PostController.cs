@@ -17,16 +17,19 @@ namespace StajBackend.Controllers
     public class PostController : Controller
     {
         private readonly IConfiguration _configuration;
+        private MongoClient dbClient;
+
         public PostController(IConfiguration configuration)
         {
             _configuration = configuration;
+            dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
+
         }
 
         //Postları get ile alıyor
         [HttpGet]
         public JsonResult Get()
         {
-            MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
 
             var dbList = dbClient.GetDatabase("ArasWebAPI").GetCollection<Post>("Post").AsQueryable();
 
@@ -37,7 +40,6 @@ namespace StajBackend.Controllers
         [Route("/PostGetById")]
         public async Task<Post> GetId(int id)
         {
-            MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
 
             var dbList = dbClient.GetDatabase("ArasWebAPI").GetCollection<Post>("Post");
             var item = await dbList
@@ -73,7 +75,6 @@ namespace StajBackend.Controllers
         [HttpPost]
         public JsonResult Post(Post entity)
         {
-            MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
 
             int lastUserId = dbClient.GetDatabase("ArasWebAPI").GetCollection<Post>("Post").AsQueryable().Count();
 
@@ -88,7 +89,6 @@ namespace StajBackend.Controllers
         [HttpPut]
         public JsonResult Put(Post entity)
         {
-            MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
             var filter = Builders<Post>.Filter.Eq("Id", entity.Id);
             var update = Builders<Post>.Update.Set("userId", entity.userId)
                                               .Set("title", entity.title)
@@ -107,7 +107,6 @@ namespace StajBackend.Controllers
         [HttpDelete]
         public JsonResult Delete(int id)
         {
-            MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
             var filter = Builders<Post>.Filter.Eq("Id", id);
             dbClient.GetDatabase("ArasWebAPI").GetCollection<Post>("Post").DeleteOne(filter);
             return new JsonResult("Deleted Successfully");

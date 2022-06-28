@@ -17,19 +17,26 @@ namespace StajAPI.Controllers
     public class UserController : ControllerBase
     {
         
+
         private readonly IConfiguration _configuration;
+        private MongoClient dbClient;
+
         public UserController(IConfiguration configuration)
         {
             _configuration = configuration;
+            dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
+
         }
 
-        //veritabanından bütün verileri alıyorum ne olduğu fark etmeksizin
         
+        
+
+
+        //veritabanından bütün verileri alıyorum ne olduğu fark etmeksizin
+
         [HttpGet]
         public JsonResult Get()
         {
-            MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
-
             var dbList = dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User").AsQueryable();
 
             return new JsonResult(dbList);
@@ -40,7 +47,6 @@ namespace StajAPI.Controllers
         [Route("/UserGetById")]
         public async Task<User> GetId(int id)
         {
-            MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
 
             var dbList = dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User");
             var item = await dbList
@@ -82,8 +88,7 @@ namespace StajAPI.Controllers
         [HttpPost]
         public JsonResult Post(User entity)
         {
-            //veri tabanı bağlantısı
-            MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
+          
             //en son userın idsini buluyorum ve bir sonraki id ye ekleme yapıyorum 
             int lastUserId = dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User").AsQueryable().Count();
             entity.Id = lastUserId + 1;
@@ -102,7 +107,6 @@ namespace StajAPI.Controllers
         public JsonResult Put(User entity , Bank array)
         {
            
-            MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
             // Filter ile hangi id ye ulaşmak istediğimizi bulup onun proplarını güncelleme yapıyorum
             var filter = Builders<User>.Filter.Eq("Id", entity.Id);
             var arrayfilter = Builders<Bank>.Filter.Eq("Id", array.Id);
