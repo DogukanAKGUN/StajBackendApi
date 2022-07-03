@@ -38,7 +38,7 @@ namespace StajBackend.Controllers
         //Verilen id ye göre collectiondan uyan id yi alıp getiriyor
         [HttpGet]
         [Route("/PostGetById")]
-        public async Task<Post> GetId(int id)
+        public async Task<Post> PostGetById(int id)
         {
 
             var dbList = dbClient.GetDatabase("ArasWebAPI").GetCollection<Post>("Post");
@@ -111,6 +111,8 @@ namespace StajBackend.Controllers
             dbClient.GetDatabase("ArasWebAPI").GetCollection<Post>("Post").DeleteOne(filter);
             return new JsonResult("Deleted Successfully");
         }
+
+
     }
 }
 

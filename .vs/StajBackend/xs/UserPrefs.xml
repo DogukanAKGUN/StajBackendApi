@@ -1,14 +1,13 @@
 ﻿<Properties StartupConfiguration="{EE88A510-C09E-476F-899E-DE8D69695A27}|Default">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.StajBackend PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workbench ActiveDocument="StajBackend/Controllers/UserController.cs">
     <Files>
-      <File FileName="StajBackend/Controllers/UserController.cs" Line="26" Column="1" />
+      <File FileName="StajBackend/Controllers/UserController.cs" Line="174" Column="36" />
+      <File FileName="StajBackend/Controllers/PostController.cs" Line="115" Column="1" />
+      <File FileName="StajBackend/Model/Favorites.cs" Line="12" Column="1" />
+      <File FileName="StajBackend/Model/User.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -29,4 +28,8 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

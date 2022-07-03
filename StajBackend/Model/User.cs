@@ -22,5 +22,7 @@ namespace StajBackend.Model
         public Company company { get; set; }
 
         public List<Bank> userBankAccounts { get; set; }
+
+        public List<Favorites> favorites { get; set; }
     }
 }

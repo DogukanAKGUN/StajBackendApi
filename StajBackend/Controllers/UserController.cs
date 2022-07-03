@@ -17,6 +17,7 @@ namespace StajAPI.Controllers
     public class UserController : ControllerBase
     {
         
+        //TODO: FAVORİLERE EKLEME SERVİSİ YAZILACAK VERİTABANI KISMI HALLEDİLDİ
 
         private readonly IConfiguration _configuration;
         private MongoClient dbClient;
@@ -27,10 +28,8 @@ namespace StajAPI.Controllers
             dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
 
         }
-
         
-        
-
+       
 
         //veritabanından bütün verileri alıyorum ne olduğu fark etmeksizin
 
@@ -45,7 +44,7 @@ namespace StajAPI.Controllers
         //Verilen id ye göre collectiondan uyan id yi alıp getiriyor
         [HttpGet]
         [Route("/UserGetById")]
-        public async Task<User> GetId(int id)
+        public async Task<User> UserGetById(int id)
         {
 
             var dbList = dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User");
@@ -109,7 +108,7 @@ namespace StajAPI.Controllers
            
             // Filter ile hangi id ye ulaşmak istediğimizi bulup onun proplarını güncelleme yapıyorum
             var filter = Builders<User>.Filter.Eq("Id", entity.Id);
-            var arrayfilter = Builders<Bank>.Filter.Eq("Id", array.Id);
+            var arrayfilter = Builders<Bank>.Filter.Eq("Id", array.id);
 
             //burda gerekli alanların eklenmisini yapıyorum
             var update = Builders<User>.Update.Set("name", entity.name)
@@ -144,10 +143,81 @@ namespace StajAPI.Controllers
         [HttpDelete]
         public JsonResult Delete(int id)
         {
-            MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
+            
             var filter = Builders<User>.Filter.Eq("Id", id);
             dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User").DeleteOne(filter);
             return new JsonResult("Deleted Successfully");
         }
+
+        /*[HttpGet]
+        [Route("/getfavorite")]
+        public JsonResult GetFavorite(User entity)
+        {
+            var dbList = dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User").AsQueryable();
+            var filter = Builders<User>.Filter.Eq("Id", entity.Id);
+
+            return null;
+        }*/
+
+        //CAST PROBLEMİ VAR
+        [HttpPost]
+        [Route("/addfavorite")]
+        public JsonResult AddFavorite(int u_id , Favorites fav)
+        {
+
+            var collection = dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User");
+            var filter = Builders<User>.Filter.Eq("Id", u_id);
+            var update = Builders<User>.Update.AddToSet("favorites",fav);
+            var result = collection.UpdateOne(filter, update);
+
+
+
+            return new JsonResult(result);
+        }
+
+        [HttpDelete]
+        [Route("/deletefavorite")]
+        public JsonResult DeleteFavorite(int u_id,int p_id)
+        {
+            var collection = dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User");
+
+            var filter = Builders<User>.Filter.Eq("Id", u_id);
+            var update = Builders<User>.Update.PullFilter(y => y.favorites, builder => builder.postId == p_id);
+            var result = collection.UpdateOne(filter, update);
+            return new JsonResult("Deleted succsesfully");
+        }
+
+        
     }
 }
+
+
+
+
+/*var u_dbList = dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User");
+            var u_item =  u_dbList
+                             .Find(Builders<User>.Filter.Eq("_id", u_id))
+                             .FirstOrDefault();
+
+            var list = u_item.favorites;
+
+            var p_dbList = dbClient.GetDatabase("ArasWebAPI").GetCollection<Post>("Post");
+            var p_item = p_dbList
+                             .Find(Builders<Post>.Filter.Eq("_id", p_id))
+                             .FirstOrDefault();
+
+
+            */
+
+//TODO:Ekleme Yapılacak
+//var a = Builders<User>.Update.AddToSet("favorites", p_id);
+
+
+
+/*var filter = Builders<User>.Filter.And(
+Builders<User>.Filter.Eq("Id", u_id)
+);
+var update = Builders<User>.Update.AddToSet("favorites", lastFavoriteId);
+
+dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User").FindOneAndUpdateAsync(filter, update);
+*/
