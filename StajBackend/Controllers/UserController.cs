@@ -21,12 +21,15 @@ namespace StajAPI.Controllers
 
         private readonly IConfiguration _configuration;
         private MongoClient dbClient;
+        private IMongoDatabase db;
+        private IMongoCollection<User> db_collection;
 
         public UserController(IConfiguration configuration)
         {
             _configuration = configuration;
             dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
-
+            db = dbClient.GetDatabase("ArasWebAPI");
+            db_collection = db.GetCollection<User>("User");
         }
         
        
@@ -36,7 +39,7 @@ namespace StajAPI.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            var dbList = dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User").AsQueryable();
+            var dbList = db_collection.AsQueryable();
 
             return new JsonResult(dbList);
         }
@@ -47,7 +50,7 @@ namespace StajAPI.Controllers
         public async Task<User> UserGetById(int id)
         {
 
-            var dbList = dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User");
+            var dbList = db_collection;
             var item = await dbList
                              .Find(Builders<User>.Filter.Eq("_id", id))
                              .FirstOrDefaultAsync();
@@ -89,11 +92,11 @@ namespace StajAPI.Controllers
         {
           
             //en son userın idsini buluyorum ve bir sonraki id ye ekleme yapıyorum 
-            int lastUserId = dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User").AsQueryable().Count();
+            int lastUserId = db_collection.AsQueryable().Count();
             entity.Id = lastUserId + 1;
 
             //veri tabanına insert atıyorum 
-            dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User").InsertOne(entity);
+            db_collection.InsertOne(entity);
 
             //Onay mesajı
             return new JsonResult("Success");
@@ -108,7 +111,7 @@ namespace StajAPI.Controllers
            
             // Filter ile hangi id ye ulaşmak istediğimizi bulup onun proplarını güncelleme yapıyorum
             var filter = Builders<User>.Filter.Eq("Id", entity.Id);
-            var arrayfilter = Builders<Bank>.Filter.Eq("Id", array.id);
+            var arrayfilter = Builders<Bank>.Filter.Eq("Id", array.Id);
 
             //burda gerekli alanların eklenmisini yapıyorum
             var update = Builders<User>.Update.Set("name", entity.name)
@@ -128,12 +131,12 @@ namespace StajAPI.Controllers
             //Sıkıntılı!!!!
             var arrayUpdate = Builders<Bank>.Update.Set("bankName", array.bankName)
                                                    .Set("bankNumber", array.bankNumber);
-                                              
-            
-            //Veri tabanına ulaşıp bütün modeli tek seferde put yapıyorum
-            dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User").UpdateOne(filter, update);
 
-            dbClient.GetDatabase("ArasWebAPI").GetCollection<Bank>("User.userBankAccounts").UpdateOne(arrayfilter, arrayUpdate);
+
+            //Veri tabanına ulaşıp bütün modeli tek seferde put yapıyorum
+            db_collection.UpdateOne(filter, update);
+
+            db.GetCollection<Bank>("User.userBankAccounts").UpdateOne(arrayfilter, arrayUpdate);
 
 
             //Verilen mesaj
@@ -145,7 +148,7 @@ namespace StajAPI.Controllers
         {
             
             var filter = Builders<User>.Filter.Eq("Id", id);
-            dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User").DeleteOne(filter);
+            db_collection.DeleteOne(filter);
             return new JsonResult("Deleted Successfully");
         }
 
@@ -155,7 +158,7 @@ namespace StajAPI.Controllers
         public JsonResult AddFavorite(int u_id , Favorites fav)
         {
 
-            var collection = dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User");
+            var collection = db_collection;
             //hangi kullanıcıya ekleme yapmak istediğimi buluyorum
             var filter = Builders<User>.Filter.Eq("Id", u_id);
             //burada bulduğum kullanıcının favorilerine ekleme yapmak için bilgileri ekliyor 
@@ -172,7 +175,7 @@ namespace StajAPI.Controllers
         [Route("/deletefavorite")]
         public JsonResult DeleteFavorite(int u_id,int p_id)
         {
-            var collection = dbClient.GetDatabase("ArasWebAPI").GetCollection<User>("User");
+            var collection = db_collection;
             //hangi kullanıcıdan silmemiz gerektiğini filtre ediyorum
             var filter = Builders<User>.Filter.Eq("Id", u_id);
             //burada favoriler arrayinden bulduğum uygun post id olanı buluyorum

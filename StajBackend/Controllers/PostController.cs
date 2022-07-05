@@ -18,12 +18,15 @@ namespace StajBackend.Controllers
     {
         private readonly IConfiguration _configuration;
         private MongoClient dbClient;
+        private IMongoDatabase db;
+        private IMongoCollection<Post> db_collection;
 
         public PostController(IConfiguration configuration)
         {
             _configuration = configuration;
             dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
-
+            db = dbClient.GetDatabase("ArasWebAPI");
+            db_collection = db.GetCollection<Post>("Post");
         }
 
         //Postları get ile alıyor
@@ -31,7 +34,7 @@ namespace StajBackend.Controllers
         public JsonResult Get()
         {
 
-            var dbList = dbClient.GetDatabase("ArasWebAPI").GetCollection<Post>("Post").AsQueryable();
+            var dbList = db_collection.AsQueryable();
 
             return new JsonResult(dbList);
         }
@@ -41,7 +44,7 @@ namespace StajBackend.Controllers
         public async Task<Post> PostGetById(int id)
         {
 
-            var dbList = dbClient.GetDatabase("ArasWebAPI").GetCollection<Post>("Post");
+            var dbList = db_collection;
             var item = await dbList
                              .Find(Builders<Post>.Filter.Eq("_id", id))
                              .FirstOrDefaultAsync();
@@ -76,11 +79,11 @@ namespace StajBackend.Controllers
         public JsonResult Post(Post entity)
         {
 
-            int lastUserId = dbClient.GetDatabase("ArasWebAPI").GetCollection<Post>("Post").AsQueryable().Count();
+            int lastUserId = db_collection.AsQueryable().Count();
 
             entity.Id = lastUserId + 1;
 
-            dbClient.GetDatabase("ArasWebAPI").GetCollection<Post>("Post").InsertOne(entity);
+            db_collection.InsertOne(entity);
 
             return new JsonResult("Success");
         }
@@ -93,9 +96,9 @@ namespace StajBackend.Controllers
             var update = Builders<Post>.Update.Set("userId", entity.userId)
                                               .Set("title", entity.title)
                                               .Set("body", entity.body);
-                                             
 
-            dbClient.GetDatabase("ArasWebAPI").GetCollection<Post>("User").UpdateOne(filter, update);
+
+            db_collection.UpdateOne(filter, update);
 
 
 
@@ -108,7 +111,7 @@ namespace StajBackend.Controllers
         public JsonResult Delete(int id)
         {
             var filter = Builders<Post>.Filter.Eq("Id", id);
-            dbClient.GetDatabase("ArasWebAPI").GetCollection<Post>("Post").DeleteOne(filter);
+            db_collection.DeleteOne(filter);
             return new JsonResult("Deleted Successfully");
         }
 
