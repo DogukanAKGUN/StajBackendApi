@@ -38,6 +38,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AWSSDK.Lightsail": {
+              "target": "Package",
+              "version": "[3.7.9.12, )"
+            },
             "Flurl": {
               "target": "Package",
               "version": "[3.0.6, )"

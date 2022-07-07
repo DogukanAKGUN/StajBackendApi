@@ -12,6 +12,7 @@
     <PackageReference Include="MongoDB.Driver" Version="2.16.1" />
     <PackageReference Include="Flurl" Version="3.0.6" />
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
+    <PackageReference Include="AWSSDK.Lightsail" Version="3.7.9.12" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +22,7 @@
     <None Remove="MongoDB.Driver" />
     <None Remove="Flurl" />
     <None Remove="Flurl.Http" />
+    <None Remove="AWSSDK.Lightsail" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />

@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "StajBackend/1.0.0": {
         "dependencies": {
+          "AWSSDK.Lightsail": "3.7.9.12",
           "Flurl": "3.0.6",
           "Flurl.Http": "3.2.4",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.6",
@@ -16,6 +17,25 @@
         },
         "runtime": {
           "StajBackend.dll": {}
+        }
+      },
+      "AWSSDK.Core/3.7.12.5": {
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.12.5"
+          }
+        }
+      },
+      "AWSSDK.Lightsail/3.7.9.12": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.12.5"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Lightsail.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.9.12"
+          }
         }
       },
       "DnsClient/1.6.1": {
@@ -280,6 +300,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AWSSDK.Core/3.7.12.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-N0eY87bXXlKDJqO1iZmNLXCasXM8tdD9VLFGVnctm6UROY0gBaYClTobncM2TXyPIkMPxfNUBUbMOMRk1QYRBQ==",
+      "path": "awssdk.core/3.7.12.5",
+      "hashPath": "awssdk.core.3.7.12.5.nupkg.sha512"
+    },
+    "AWSSDK.Lightsail/3.7.9.12": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lr9mX6Jmz38sJfSs/i87A3oGrIelnMX8kyh1ThCrB5vpO9EsbaMpPIjXuDfBif6rRkwfwNxt4N6L9yeefmVMLg==",
+      "path": "awssdk.lightsail/3.7.9.12",
+      "hashPath": "awssdk.lightsail.3.7.9.12.nupkg.sha512"
     },
     "DnsClient/1.6.1": {
       "type": "package",

@@ -18,5 +18,7 @@
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_Extensions_ApiDescription_Server Condition=" '$(PkgMicrosoft_Extensions_ApiDescription_Server)' == '' ">/Users/dogukan/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0</PkgMicrosoft_Extensions_ApiDescription_Server>
+    <PkgAWSSDK_Core Condition=" '$(PkgAWSSDK_Core)' == '' ">/Users/dogukan/.nuget/packages/awssdk.core/3.7.12.5</PkgAWSSDK_Core>
+    <PkgAWSSDK_Lightsail Condition=" '$(PkgAWSSDK_Lightsail)' == '' ">/Users/dogukan/.nuget/packages/awssdk.lightsail/3.7.9.12</PkgAWSSDK_Lightsail>
   </PropertyGroup>
 </Project>

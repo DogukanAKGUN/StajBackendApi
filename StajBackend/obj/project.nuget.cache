@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "AA3cjPzz45wa2qME9OV1rnIZP8BXwbh3yxE+7v6AT5tHYdFsk2gHTxSVWXHjopFRO45ATKGDK/MxJD7w/OFdAw==",
+  "dgSpecHash": "bcTP6eINAWBd2acPaGcQJ//weCcq74dXUy6JHo0arTHEE8KikOn4pLCpWZIAJhnqpQtf0Zy+HRZiSua/+H+Ruw==",
   "success": true,
   "projectFilePath": "/Users/dogukan/Projects/StajBackend/StajBackend/StajBackend.csproj",
   "expectedPackageFiles": [
+    "/Users/dogukan/.nuget/packages/awssdk.core/3.7.12.5/awssdk.core.3.7.12.5.nupkg.sha512",
+    "/Users/dogukan/.nuget/packages/awssdk.lightsail/3.7.9.12/awssdk.lightsail.3.7.9.12.nupkg.sha512",
     "/Users/dogukan/.nuget/packages/dnsclient/1.6.1/dnsclient.1.6.1.nupkg.sha512",
     "/Users/dogukan/.nuget/packages/flurl/3.0.6/flurl.3.0.6.nupkg.sha512",
     "/Users/dogukan/.nuget/packages/flurl.http/3.2.4/flurl.http.3.2.4.nupkg.sha512",

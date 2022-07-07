@@ -1,10 +1,15 @@
 ﻿<Properties StartupConfiguration="{EE88A510-C09E-476F-899E-DE8D69695A27}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="StajBackend/Controllers/UserController.cs">
+  <MonoDevelop.Ide.ItemProperties.StajBackend PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="StajBackend/Model/Bank.cs">
     <Files>
-      <File FileName="StajBackend/Controllers/UserController.cs" Line="188" Column="1" />
-      <File FileName="StajBackend/Controllers/PostController.cs" Line="115" Column="1" />
+      <File FileName="StajBackend/Controllers/UserController.cs" Line="167" Column="1" />
+      <File FileName="StajBackend/Controllers/PostController.cs" Line="109" Column="1" />
       <File FileName="StajBackend/Model/Favorites.cs" Line="5" Column="6" />
-      <File FileName="StajBackend/Model/User.cs" Line="1" Column="1" />
+      <File FileName="StajBackend/Model/User.cs" Line="24" Column="46" />
+      <File FileName="StajBackend/Model/Bank.cs" Line="12" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,9 +17,7 @@
           <Node name="StajBackend" expanded="True">
             <Node name="StajBackend" expanded="True">
               <Node name="Dependencies" expanded="True" />
-              <Node name="Controllers" expanded="True">
-                <Node name="UserController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Model" expanded="True" />
               <Node name="Properties" expanded="True" />
               <Node name="appsettings.json" expanded="True" />
@@ -30,8 +33,4 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.StajBackend PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

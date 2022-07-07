@@ -23,6 +23,7 @@ namespace StajAPI.Controllers
         private MongoClient dbClient;
         private IMongoDatabase db;
         private IMongoCollection<User> db_collection;
+        private readonly string _apiUrl;
 
         public UserController(IConfiguration configuration)
         {
@@ -30,6 +31,8 @@ namespace StajAPI.Controllers
             dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
             db = dbClient.GetDatabase("ArasWebAPI");
             db_collection = db.GetCollection<User>("User");
+            _apiUrl = _configuration.GetConnectionString("ApiUrl");
+            
         }
         
        
@@ -44,44 +47,43 @@ namespace StajAPI.Controllers
             return new JsonResult(dbList);
         }
 
+
+        //TODO unhandled exepction ve handled exepction araştır
         //Verilen id ye göre collectiondan uyan id yi alıp getiriyor
         [HttpGet]
         [Route("/UserGetById")]
-        public async Task<User> UserGetById(int id)
+        public JsonResult UserGetById(int id)
         {
 
             var dbList = db_collection;
-            var item = await dbList
+            var item =  dbList
                              .Find(Builders<User>.Filter.Eq("_id", id))
-                             .FirstOrDefaultAsync();
+                             .FirstOrDefault();
 
-            return item;
+            return new JsonResult(item);
         }
         
         //özel bir route verdim çünkü her seferinde erişilmesini istemiyorum
         [HttpGet]
-        [Route("/getdataUser")]
-        public async Task<User> FlurlGet()
+        [Route("/GetDataUser")]
+        public async Task<IActionResult> FlurlGet()
         {
             //flurl kütüphanesinden yararlanıp verilen Api ye request atıp verileri alıyorum
-            var result = await "http://jsonplaceholder.typicode.com"
+            var result = await _apiUrl
                     .AppendPathSegment("users")
                     .SetQueryParams()
-                    .GetJsonAsync<IEnumerable<User>>();
-
-            //user tipinde bir değişken tanımlayıp aldığım verilerin modele uymasını sağlıyorum ve foreach kullanarak her bir verinin kayır etme fonksiyonuna gönderip veritabanına kaydını sağlıyorum 
-            var listItem = new User();
+                    .GetJsonAsync<IEnumerable<User>>();            
             
             foreach (var item in result)
             {
-                listItem = item;
-                Post(listItem);
+                
+                Post(item);
                 
             }
 
             //ne döndüreceğime karar vermediğim için şimdilik null döndürüyorum
 
-            return null;
+            return Ok();
         }
 
 
@@ -106,12 +108,12 @@ namespace StajAPI.Controllers
         //Put ile var olan bir kaydı güncelledim
         //eksikliği array içine kayıt yapamıyorum
         [HttpPut]
-        public JsonResult Put(User entity , Bank array)
+        public JsonResult Put(User entity)
         {
            
             // Filter ile hangi id ye ulaşmak istediğimizi bulup onun proplarını güncelleme yapıyorum
             var filter = Builders<User>.Filter.Eq("Id", entity.Id);
-            var arrayfilter = Builders<Bank>.Filter.Eq("Id", array.Id);
+            
 
             //burda gerekli alanların eklenmisini yapıyorum
             var update = Builders<User>.Update.Set("name", entity.name)
@@ -128,15 +130,13 @@ namespace StajAPI.Controllers
                                               .Set("company.name", entity.company.name)
                                               .Set("company.catchPhrase", entity.company.catchPhrase)
                                               .Set("company.bs", entity.company.bs);
-            //Sıkıntılı!!!!
-            var arrayUpdate = Builders<Bank>.Update.Set("bankName", array.bankName)
-                                                   .Set("bankNumber", array.bankNumber);
+          
 
 
             //Veri tabanına ulaşıp bütün modeli tek seferde put yapıyorum
             db_collection.UpdateOne(filter, update);
 
-            db.GetCollection<Bank>("User.userBankAccounts").UpdateOne(arrayfilter, arrayUpdate);
+
 
 
             //Verilen mesaj

@@ -19,14 +19,16 @@ namespace StajBackend.Controllers
         private readonly IConfiguration _configuration;
         private MongoClient dbClient;
         private IMongoDatabase db;
-        private IMongoCollection<Post> db_collection;
+        private IMongoCollection<Post> dbCollection;
+        private readonly string _apiUrl;
 
         public PostController(IConfiguration configuration)
         {
             _configuration = configuration;
             dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
             db = dbClient.GetDatabase("ArasWebAPI");
-            db_collection = db.GetCollection<Post>("Post");
+            dbCollection = db.GetCollection<Post>("Post");
+            _apiUrl = _configuration.GetConnectionString("ApiUrl");
         }
 
         //Postları get ile alıyor
@@ -34,7 +36,7 @@ namespace StajBackend.Controllers
         public JsonResult Get()
         {
 
-            var dbList = db_collection.AsQueryable();
+            var dbList = dbCollection.AsQueryable();
 
             return new JsonResult(dbList);
         }
@@ -44,7 +46,7 @@ namespace StajBackend.Controllers
         public async Task<Post> PostGetById(int id)
         {
 
-            var dbList = db_collection;
+            var dbList = dbCollection;
             var item = await dbList
                              .Find(Builders<Post>.Filter.Eq("_id", id))
                              .FirstOrDefaultAsync();
@@ -54,24 +56,24 @@ namespace StajBackend.Controllers
 
         [HttpGet]
         [Route("/getdataPost")]
-        public async Task<Post> FlurlGet()
+        public async Task<IActionResult> FlurlGet()
         {
 
-            var result = await "http://jsonplaceholder.typicode.com"
-                .AppendPathSegment("posts")
-                .SetQueryParams()
-                .GetJsonAsync<IEnumerable<Post>>();
+            var result = await _apiUrl
+                            .AppendPathSegment("posts")
+                            .SetQueryParams()
+                            .GetJsonAsync<IEnumerable<Post>>();
 
-            var listPost = new Post();
+           
 
             foreach (var item in result)
             {
-                listPost = item;
-                Post(listPost);
+                
+                Post(item);
             }
 
 
-            return null;
+            return Ok();
 
         }
 
@@ -79,11 +81,11 @@ namespace StajBackend.Controllers
         public JsonResult Post(Post entity)
         {
 
-            int lastUserId = db_collection.AsQueryable().Count();
+            int lastUserId = dbCollection.AsQueryable().Count();
 
             entity.Id = lastUserId + 1;
 
-            db_collection.InsertOne(entity);
+            dbCollection.InsertOne(entity);
 
             return new JsonResult("Success");
         }
@@ -98,7 +100,7 @@ namespace StajBackend.Controllers
                                               .Set("body", entity.body);
 
 
-            db_collection.UpdateOne(filter, update);
+            dbCollection.UpdateOne(filter, update);
 
 
 
@@ -111,7 +113,7 @@ namespace StajBackend.Controllers
         public JsonResult Delete(int id)
         {
             var filter = Builders<Post>.Filter.Eq("Id", id);
-            db_collection.DeleteOne(filter);
+            dbCollection.DeleteOne(filter);
             return new JsonResult("Deleted Successfully");
         }
 
