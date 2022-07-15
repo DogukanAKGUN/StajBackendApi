@@ -35,7 +35,13 @@ namespace StajAPI.Controllers
             
         }
         
-       
+        [HttpGet]
+        [Route("/string")]
+        public JsonResult conn()
+        {
+            var a = _configuration.GetConnectionString("MongoDbConnection");
+            return new JsonResult(a);
+        }
 
         //veritabanından bütün verileri alıyorum ne olduğu fark etmeksizin
 

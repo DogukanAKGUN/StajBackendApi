@@ -5,7 +5,11 @@
 /Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/StajBackend.runtimeconfig.json
 /Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/StajBackend.dll
 /Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/StajBackend.pdb
+/Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/AWSSDK.Core.dll
+/Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/AWSSDK.Lightsail.dll
 /Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/DnsClient.dll
+/Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/Flurl.dll
+/Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/Flurl.Http.dll
 /Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/Microsoft.AspNetCore.JsonPatch.dll
 /Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 /Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/Microsoft.OpenApi.dll
@@ -45,7 +49,3 @@
 /Users/dogukan/Projects/StajBackend/StajBackend/obj/Debug/net6.0/StajBackend.pdb
 /Users/dogukan/Projects/StajBackend/StajBackend/obj/Debug/net6.0/StajBackend.genruntimeconfig.cache
 /Users/dogukan/Projects/StajBackend/StajBackend/obj/Debug/net6.0/ref/StajBackend.dll
-/Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/Flurl.dll
-/Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/Flurl.Http.dll
-/Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/AWSSDK.Core.dll
-/Users/dogukan/Projects/StajBackend/StajBackend/bin/Debug/net6.0/AWSSDK.Lightsail.dll

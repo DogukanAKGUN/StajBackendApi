@@ -17,21 +17,23 @@ namespace StajBackend.Controllers
     public class PostController : Controller
     {
         private readonly IConfiguration _configuration;
-        private MongoClient dbClient;
+        private IMongoClient dbClient;
         private IMongoDatabase db;
         private IMongoCollection<Post> dbCollection;
         private readonly string _apiUrl;
+        private string cnnStr;
 
         public PostController(IConfiguration configuration)
         {
             _configuration = configuration;
-            dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));
+            cnnStr = _configuration.GetConnectionString("MongoDbConnection");
+            dbClient = new MongoClient(cnnStr);
             db = dbClient.GetDatabase("ArasWebAPI");
             dbCollection = db.GetCollection<Post>("Post");
             _apiUrl = _configuration.GetConnectionString("ApiUrl");
         }
 
-        //Postları get ile alıyor
+        //Postları get ile alıyor 
         [HttpGet]
         public JsonResult Get()
         {

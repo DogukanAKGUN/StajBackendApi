@@ -1,15 +1,15 @@
 ﻿<Properties StartupConfiguration="{EE88A510-C09E-476F-899E-DE8D69695A27}|Default">
-  <MonoDevelop.Ide.ItemProperties.StajBackend PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="StajBackend/Model/Bank.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="StajBackend/Program.cs">
     <Files>
-      <File FileName="StajBackend/Controllers/UserController.cs" Line="167" Column="1" />
-      <File FileName="StajBackend/Controllers/PostController.cs" Line="109" Column="1" />
-      <File FileName="StajBackend/Model/Favorites.cs" Line="5" Column="6" />
-      <File FileName="StajBackend/Model/User.cs" Line="24" Column="46" />
-      <File FileName="StajBackend/Model/Bank.cs" Line="12" Column="1" />
+      <File FileName="StajBackend/Controllers/PostController.cs" Line="88" Column="41" />
+      <File FileName="StajBackend/Controllers/UserController.cs" Line="31" Column="95" />
+      <File FileName="StajBackend/Model/User.cs" Line="11" Column="1" />
+      <File FileName="StajBackend/Properties/launchSettings.json" Line="22" Column="21" />
+      <File FileName="StajBackend/Program.cs" Line="16" Column="22" />
+      <File FileName="StajBackend/appsettings.Development.json" Line="6" Column="15" />
+      <File FileName="StajBackend/Properties/PublishProfiles/FolderProfile.pubxml" Line="1" Column="1" />
+      <File FileName="StajBackend/Startup.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -30,6 +30,9 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.StajBackend PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
