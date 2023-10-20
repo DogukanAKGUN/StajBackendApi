@@ -25,7 +25,7 @@ namespace StajAPI.Controllers
         private IMongoCollection<User> db_collection;
         private readonly string _apiUrl;
 
-        public UserController(IConfiguration configuration)
+        private UserController(IConfiguration configuration)
         {
             _configuration = configuration;
             dbClient = new MongoClient(_configuration.GetConnectionString("MongoDbConnection"));

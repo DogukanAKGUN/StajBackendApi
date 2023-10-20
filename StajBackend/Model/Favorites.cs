@@ -1,5 +1,4 @@
-﻿using System;
-namespace StajBackend.Model
+﻿namespace StajBackend.Model
 {
     public class Favorites
     {

@@ -70,47 +70,17 @@ namespace StajBackend.Controllers
             return new JsonResult("Success");
         }
 
-        [HttpPut]
-        public JsonResult Put(User entity)
+
+
+        //Delete için uygun linq sorgusu bulamadım filter problem çıkartıyor cast problemi yaşıyorum. aynı putta olduğu gibi.
+        [HttpDelete]
+        public JsonResult Delete(int id)
         {
 
-            // Filter ile hangi id ye ulaşmak istediğimizi bulup onun proplarını güncelleme yapıyorum
-            //var filter = Builders<User>.Filter.Eq("Id", entity.Id);
+            var filter = Builders<User>.Filter.Eq("Id", id);
 
-
-            var filter = Builders<User>.Filter.Equals
-                    (from User in db_collection.AsQueryable()
-                     where User.Id == entity.Id
-                     select User);
-
-
-            //burda gerekli alanların eklenmisini yapıyorum
-            var update = Builders<User>.Update.Set("name", entity.name)
-                                              .Set("username", entity.username)
-                                              .Set("email", entity.email)
-                                              .Set("address.street", entity.address.street)
-                                              .Set("address.suite", entity.address.suite)
-                                              .Set("address.city", entity.address.city)
-                                              .Set("address.zipcode", entity.address.zipcode)
-                                              .Set("address.geo.lat", entity.address.geo.lat)
-                                              .Set("address.geo.lng", entity.address.geo.lng)
-                                              .Set("phone", entity.phone)
-                                              .Set("website", entity.website)
-                                              .Set("company.name", entity.company.name)
-                                              .Set("company.catchPhrase", entity.company.catchPhrase)
-                                              .Set("company.bs", entity.company.bs);
-
-
-            
-            //Veri tabanına ulaşıp bütün modeli tek seferde put yapıyorum
-            db_collection.UpdateOne(filter, update);
-
-
-
-
-            //Verilen mesaj
-            return new JsonResult("Updated Successfully");
+            db_collection.DeleteOne(filter);
+            return new JsonResult("Deleted Successfully");
         }
     }
 }
-
